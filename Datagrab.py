@@ -1,5 +1,10 @@
 import pandas as pd
 import requests
+import os
+
+
+if not os.path.exists('Data'):
+    os.makedirs('Data')
 
 url = 'https://dex.binance.org/api/v1/ticker/24hr'
 APItic = pd.DataFrame(requests.get(url).json())
@@ -10,8 +15,8 @@ n = 0
 
 while n < 153:
        n = n + 1
-       
        symb = a[n]
+       
        #downhere you can change time interval: (change 1d for: 1m, 5m, 15m 1h, 4h,1w, 1m and so on)
        inter = "&interval=1d"
        url2 = f"https://dex.binance.org/api/v1/klines?symbol=" \
