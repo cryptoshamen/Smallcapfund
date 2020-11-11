@@ -2,18 +2,26 @@ import pandas as pd
 import requests
 import os
 
-
 if not os.path.exists('Data'):
     os.makedirs('Data')
+    
+    
+enter = f"D:\Pikny" #here you need to input your dir of Datagrab.py
+
+pathfile = f"{enter}" \
+'\Data\Data'
+
 
 url = 'https://dex.binance.org/api/v1/ticker/24hr'
 APItic = pd.DataFrame(requests.get(url).json())
 
+
 a = APItic['symbol']
 n = 0
-#upphere we are obtaining symbols for all available exchange options (theyre 153)
+m = len(a) - 1
 
-while n < len(a):
+
+while n < m:
        n = n + 1
        symb = a[n]
        
@@ -29,9 +37,7 @@ while n < len(a):
        
        sym = a[n]
        typ = ".xlsx"
-       
-       #downhere you need to type your path dir instead of D:\Pikny (wprowadź folder w ktorym umiesciles folder Pikny)
-       path = f"D:\Pikny\Data\Data" \
+       path = f"{pathfile}" \
        f"{sym}" \
        f"{typ}"    
        print(Data.to_excel(path))
@@ -39,12 +45,12 @@ while n < len(a):
        #downhere we gonna save our obtained data to csv files
        sym = a[n]
        typ = ".csv"
-       path = f"D:\Pikny\Data\Data" \
+       path = f"{pathfile}" \
        f"{sym}" \
        f"{typ}" 
        print(Data.to_csv(path))
        
-       
+      
        
 # obtained data format: columns in output files:
 #  0 Open time
